@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "fastapi-toolforge-blueprint"
 version = "0.1.0"
-description = "Sample FastAPI app based on the official tutorial. Configured for deployment on Toolforge."
+description = "Sample FastAPI app Configured for deployment on Toolforge."
 authors = ["Slavina Stefanova <me@slavina.dev>"]
 readme = "README.md"
 packages = [{include = "fastapi_toolforge_blueprint"}]
@@ -10,7 +10,17 @@ packages = [{include = "fastapi_toolforge_blueprint"}]
 python = "^3.10"
 fastapi = "^0.95.1"
 uvicorn = "^0.22.0"
+tortoise-orm = {extras = ["aiosqlite"], version = "^0.19.3"}
+aerich = "^0.7.1"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.3.1"
+httpx = "^0.24.0"
+
+[tool.aerich]
+tortoise_orm = "app.db.TORTOISE_ORM"
+location = "./migrations"
+src_folder = "./."
 
 [build-system]
 requires = ["poetry-core"]
