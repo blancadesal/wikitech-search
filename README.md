@@ -1,2 +1,3 @@
 # fastapi-toolforge-blueprint
-A sample FastAPI app based on the official tutorial. Configured for deployment on Toolforge.
+
+A sample FastAPI app. Configured for deployment on Toolforge.
