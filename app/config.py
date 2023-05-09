@@ -7,9 +7,9 @@ log = logging.getLogger("uvicorn")
 
 
 class Settings(BaseSettings):
-    environment: str = "dev"
+    environment: str = "prod"
     testing: bool = bool(0)
-    database_url: str = None
+    database_url: str = "sqlite://db.sqlite3"
 
 
 @lru_cache()
