@@ -9,7 +9,7 @@ log = logging.getLogger("uvicorn")
 
 
 TORTOISE_ORM = {
-    "connections": {"default": os.environ.get("DATABASE_URL")},
+    "connections": {"default": os.environ.get("DATABASE_URL", "sqlite://db.sqlite3")},
     "apps": {
         "models": {
             "models": ["app.models.tortoise", "aerich.models"],
