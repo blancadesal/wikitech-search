@@ -10,7 +10,7 @@ async def generate_summary(summary_id: int, url: str) -> None:
     article.parse()
 
     try:
-        nltk.data.find("tokenizers/punkt")
+        nltk.data.find("/workspace/app/nltk_data/tokenizers/punkt")
     except LookupError:
         nltk.download("punkt", download_dir="/data/project/fastapi-blueprint/nltk_data")
     finally:
