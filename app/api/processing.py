@@ -1,9 +1,8 @@
 import logging
 import pickle
+
 import mwparserfromhell
 import requests
-import torch
-
 from annoy import AnnoyIndex
 from mwedittypes.utils import wikitext_to_plaintext
 from sentence_transformers import SentenceTransformer
@@ -112,10 +111,10 @@ def _get_section_plaintext(title, wikitext):
 async def load_similarity_index():
     """Load in nearest neighbor index and labels."""
     global IDX_TO_SECTION
-    index_fp = EMB_DIR / 'embeddings.ann'
-    labels_fp = EMB_DIR / 'section_to_idx.pickle'
+    index_fp = EMB_DIR / "embeddings.ann"
+    labels_fp = EMB_DIR / "section_to_idx.pickle"
     log.info("Using pre-built ANNOY index")
     ANNOY_INDEX.load(str(index_fp))
-    with open(labels_fp, 'rb') as fin:
+    with open(labels_fp, "rb") as fin:
         IDX_TO_SECTION = pickle.load(fin)
     log.info(f"{len(IDX_TO_SECTION)} passages in nearest neighbor index.")
