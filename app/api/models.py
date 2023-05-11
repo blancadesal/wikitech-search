@@ -4,8 +4,6 @@ from app.api.processing import get_model_info
 
 router = APIRouter()
 
-emb_model_name = "sentence-transformers/all-mpnet-base-v2"
-qa_model_name = "deepset/tinyroberta-squad2"
 MODEL_INFO = get_model_info()
 
 
