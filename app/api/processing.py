@@ -15,7 +15,7 @@ log = logging.getLogger("uvicorn")
 EMB_DIR = settings.emb_dir
 
 emb_model_name = "sentence-transformers/all-mpnet-base-v2"
-EMB_MODEL = SentenceTransformer(emb_model_name, cache_folder=EMB_DIR)
+EMB_MODEL = SentenceTransformer(emb_model_name)
 ANNOY_INDEX = AnnoyIndex(768, "angular")
 IDX_TO_SECTION = []
 
