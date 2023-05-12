@@ -8,4 +8,9 @@ services:
     env_file: ./.env.prod
     command: gunicorn app.main:app -k uvicorn.workers.UvicornWorker --workers=4 --bind 0.0.0.0:8000
     ports:
-      - "80:8000"
+      - "8000:8000"
+    volumes:
+      - ./embeddings:/code/embeddings
+      - ./huggingface:/code/huggingface
+      - ./torch:/code/torch
+
