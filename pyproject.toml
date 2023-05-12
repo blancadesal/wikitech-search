@@ -17,7 +17,6 @@ mwparserfromhell = "^0.6.4"
 requests = "^2.30.0"
 sentence-transformers = "^2.2.2"
 transformers = "^4.29.0"
-httpx = "^0.24.0"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
