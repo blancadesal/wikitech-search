@@ -27,8 +27,8 @@ def create_application() -> FastAPI:
     )
 
     api_router.include_router(ping.router)
-    api_router.include_router(search.router)
     api_router.include_router(models.router)
+    api_router.include_router(search.router)
 
     app.include_router(api_router, prefix="/api")
 
