@@ -1,6 +1,6 @@
 import logging
 
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api import models, ping, search
@@ -11,12 +11,11 @@ log = logging.getLogger("uvicorn")
 
 def create_application() -> FastAPI:
     app = FastAPI()
+    api_router = APIRouter()
 
     origins = [
-        "http://localhost.tiangolo.com",
-        "https://localhost.tiangolo.com",
+        "https://wikitech-search.toolforge.org",
         "http://localhost",
-        "http://localhost:8080",
     ]
 
     app.add_middleware(
@@ -27,9 +26,11 @@ def create_application() -> FastAPI:
         allow_headers=["*"],
     )
 
-    app.include_router(ping.router)
-    app.include_router(search.router)
-    app.include_router(models.router)
+    api_router.include_router(ping.router)
+    api_router.include_router(search.router)
+    api_router.include_router(models.router)
+
+    app.include_router(api_router, prefix="/api")
 
     return app
 
