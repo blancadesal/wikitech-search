@@ -87,9 +87,7 @@ db.sqlite*
 data/
 
 # models
-embeddings/
-huggingface/
-torch/
+NLP_resources
 
 .env.prod
 
