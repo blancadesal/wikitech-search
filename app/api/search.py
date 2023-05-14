@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from app.api.processing import get_answer, get_inputs
-from app.models.schemas import QuerySchema, ResultSchema
+from app.api.schemas import QuerySchema, ResultSchema
+from app.processing import get_answer, get_inputs
 
 router = APIRouter()
 

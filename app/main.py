@@ -1,10 +1,10 @@
 import logging
 
-from fastapi import FastAPI, APIRouter
+from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api import models, ping, search
-from app.api.processing import load_similarity_index
+from app.processing import load_similarity_index
 
 log = logging.getLogger("uvicorn")
 

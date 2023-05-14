@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.api.processing import get_model_info
+from app.processing import get_model_info
 
 router = APIRouter()
 
