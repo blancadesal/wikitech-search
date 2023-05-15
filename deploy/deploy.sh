@@ -3,6 +3,10 @@
 cd /home/sstefanova/wikitech-search
 git pull
 
+# Check if .env file exists, if not generate it
+if [ ! -f .env ]; then
+    ./deploy/generate-env.sh
+fi
 
 if [ "$(docker compose ps -q)" ]; then
     docker compose down -v
@@ -10,7 +14,6 @@ fi
 
 docker compose build
 docker compose up -d
-
 
 if [ ! -e /etc/nginx/sites-available/wikitech-search.wmcloud.org ] || \
    ! cmp -s ./deploy/nginx.conf /etc/nginx/sites-available/wikitech-search.wmcloud.org
