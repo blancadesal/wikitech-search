@@ -3,12 +3,23 @@
 cd /home/sstefanova/wikitech-search
 git pull
 
-cp ./nginx.conf /etc/nginx/sites-available/wikitech-search.wmcloud.org
 
-sudo ln -s /etc/nginx/sites-available/wikitech-search.wmcloud.org /etc/nginx/sites-enabled/
+if [ "$(docker-compose ps -q)" ]; then
+    docker-compose down -v
+fi
 
-sudo systemctl restart nginx
-
-docker-compose down -v
 docker-compose build
 docker-compose up -d
+
+
+if [ ! -e /etc/nginx/sites-available/wikitech-search.wmcloud.org ] || \
+   ! cmp -s ./nginx.conf /etc/nginx/sites-available/wikitech-search.wmcloud.org
+then
+    cp ./nginx.conf /etc/nginx/sites-available/wikitech-search.wmcloud.org
+
+    if [ ! -e /etc/nginx/sites-enabled/wikitech-search.wmcloud.org ]; then
+        sudo ln -s /etc/nginx/sites-available/wikitech-search.wmcloud.org /etc/nginx/sites-enabled/
+    fi
+
+    sudo systemctl restart nginx
+fi
