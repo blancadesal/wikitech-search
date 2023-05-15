@@ -4,12 +4,12 @@ cd /home/sstefanova/wikitech-search
 git pull
 
 
-if [ "$(docker-compose ps -q)" ]; then
-    docker-compose down -v
+if [ "$(docker compose ps -q)" ]; then
+    docker compose down -v
 fi
 
-docker-compose build
-docker-compose up -d
+docker compose build
+docker compose up -d
 
 
 if [ ! -e /etc/nginx/sites-available/wikitech-search.wmcloud.org ] || \
