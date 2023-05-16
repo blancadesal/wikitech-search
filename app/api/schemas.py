@@ -1,9 +1,4 @@
-from pydantic import BaseModel, Field
-
-
-class QuerySchema(BaseModel):
-    query: str = Field(..., description="The query to search")
-
+from pydantic import BaseModel
 
 class SearchSchema(BaseModel):
     title: str
