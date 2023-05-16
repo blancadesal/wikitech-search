@@ -4,10 +4,9 @@ from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api import models, ping, search
-from app.processing import load_similarity_index
+from app.model_manager import get_model_manager
 
 log = logging.getLogger("uvicorn")
-
 
 def create_application() -> FastAPI:
     app = FastAPI()
@@ -34,17 +33,17 @@ def create_application() -> FastAPI:
 
     return app
 
-
 app = create_application()
-
 
 @app.on_event("startup")
 async def startup_event():
     log.info("Starting up...")
     log.info("Loading similarity index...")
-    await load_similarity_index()
+    model_manager = get_model_manager()
+    model_manager.load_similarity_index()
 
 
 @app.on_event("shutdown")
 async def shutdown_event():
     log.info("Shutting down...")
+

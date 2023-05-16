@@ -7,7 +7,7 @@ from app.config import settings
 log = logging.getLogger("uvicorn")
 
 
-class WikiApi:
+class WikiAPI:
     def __init__(self, domain="wikitech.wikimedia"):
         self.base_url = f"https://{domain}.org/w/api.php"
         self.headers = {"User-Agent": settings.custom_ua}
