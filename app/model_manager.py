@@ -35,8 +35,8 @@ class ModelManager:
 
     def load_similarity_index(self):
         """Load in nearest neighbor index and labels."""
-        index_fp = self.emb_dir / "embeddings.ann"
-        labels_fp = self.emb_dir / "section_to_idx.pickle"
+        index_fp = self.emb_dir / "msmarco-distilbert-base-v4_embeddings.ann"
+        labels_fp = self.emb_dir / "msmarco-distilbert-base-v4_section-to-idx.pickle"
         log.info("Using pre-built ANNOY index")
         self.ANNOY_INDEX.load(str(index_fp))
         with open(labels_fp, "rb") as fin:
