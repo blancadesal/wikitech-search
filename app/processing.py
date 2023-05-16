@@ -2,15 +2,16 @@ import logging
 import pickle
 
 import mwparserfromhell
-import requests
 from annoy import AnnoyIndex
 from mwedittypes.utils import wikitext_to_plaintext
 from sentence_transformers import SentenceTransformer
 from transformers import pipeline
 
 from app.config import settings
+from app.wiki_api import WikiApi
 
 log = logging.getLogger("uvicorn")
+wiki_api = WikiApi()
 
 EMB_DIR = settings.emb_dir
 
@@ -52,37 +53,13 @@ def get_inputs(query, result_depth=3):
         score = 1 - nns[1][i]
         title = IDX_TO_SECTION[idx]
         try:
-            wt = _get_wikitext(title)
+            wt = wiki_api.get_wikitext(title)
             pt = _get_section_plaintext(title, wt).strip()
             results.append({"title": title, "score": score, "text": pt})
         except Exception:
             continue
 
     return results
-
-
-def _get_wikitext(title, domain="wikitech.wikimedia"):
-    """Get wikitext for an article."""
-    try:
-        base_url = f"https://{domain}.org/w/api.php"
-        params = {
-            "action": "query",
-            "prop": "revisions",
-            "titles": title.split("#", maxsplit=1)[0],
-            "rvslots": "*",
-            "rvprop": "content",
-            "rvdir": "older",
-            "rvlimit": 1,
-            "format": "json",
-            "formatversion": 2,
-        }
-        r = requests.get(
-            url=base_url, params=params, headers={"User-Agent": settings.custom_ua}
-        )
-        rj = r.json()
-        return rj["query"]["pages"][0]["revisions"][0]["slots"]["main"]["content"]
-    except Exception:
-        return None
 
 
 def _get_section_plaintext(title, wikitext):
