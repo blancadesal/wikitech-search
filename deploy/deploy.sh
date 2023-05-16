@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
-cd /home/sstefanova/wikitech-search
+PROJECT_DIR="/home/sstefanova/wikitech-search"
+REPO_URL="https://github.com/blancadesal/wikitech-search.git" 
+
+if [ ! -d "$PROJECT_DIR" ]; then
+    git clone $REPO_URL $PROJECT_DIR
+fi
+
+cd $PROJECT_DIR
 git pull
 
 # Check if .env file exists, if not generate it
