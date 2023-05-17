@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     environment: str = "dev"
     testing: bool = bool(0)
     emb_dir: Path = Path("/code/embeddings")
-    custom_ua: str | None = None
+    custom_ua: str | None = "Wikitech-search (Cloud VPS)"
 
 
 @lru_cache()
