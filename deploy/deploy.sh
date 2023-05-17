@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 PROJECT_DIR="/home/sstefanova/wikitech-search"
-REPO_URL="https://github.com/blancadesal/wikitech-search.git" 
+REPO_URL="https://github.com/blancadesal/wikitech-search.git"
 
 if [ ! -d "$PROJECT_DIR" ]; then
     git clone $REPO_URL $PROJECT_DIR
