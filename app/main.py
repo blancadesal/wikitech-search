@@ -8,6 +8,7 @@ from app.model_manager import get_model_manager
 
 log = logging.getLogger("uvicorn")
 
+
 def create_application() -> FastAPI:
     app = FastAPI()
     api_router = APIRouter()
@@ -33,7 +34,9 @@ def create_application() -> FastAPI:
 
     return app
 
+
 app = create_application()
+
 
 @app.on_event("startup")
 async def startup_event():
@@ -46,4 +49,3 @@ async def startup_event():
 @app.on_event("shutdown")
 async def shutdown_event():
     log.info("Shutting down...")
-

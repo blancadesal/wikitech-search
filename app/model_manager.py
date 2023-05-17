@@ -21,13 +21,22 @@ class ModelManager:
             cls._instance = super(ModelManager, cls).__new__(cls)
         return cls._instance
 
-    def __init__(self, emb_model_name="sentence-transformers/all-mpnet-base-v2", qa_model_name="deepset/tinyroberta-squad2", emb_dir=settings.emb_dir):
-        if not hasattr(self, 'initialized'):
+    def __init__(
+        self,
+        emb_model_name="sentence-transformers/all-mpnet-base-v2",
+        qa_model_name="deepset/tinyroberta-squad2",
+        emb_dir=settings.emb_dir,
+    ):
+        if not hasattr(self, "initialized"):
             self.emb_dir = emb_dir
             self.emb_model_name = emb_model_name
             self.qa_model_name = qa_model_name
             self.EMB_MODEL = SentenceTransformer(self.emb_model_name)
-            self.QA_MODEL = pipeline("question-answering", model=self.qa_model_name, tokenizer=self.qa_model_name)
+            self.QA_MODEL = pipeline(
+                "question-answering",
+                model=self.qa_model_name,
+                tokenizer=self.qa_model_name,
+            )
             self.ANNOY_INDEX = AnnoyIndex(768, "angular")
             self.IDX_TO_SECTION = []
             self.wiki_api = WikiAPI()
@@ -74,7 +83,7 @@ class ModelManager:
                 pt = self._get_section_plaintext(title, wt).strip()
                 results.append({"title": title, "score": score, "text": pt})
             except Exception as e:
-                log.info(f'Exception: {e}')
+                log.info(f"Exception: {e}")
                 continue
         return results
 
